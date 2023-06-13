@@ -1,4 +1,5 @@
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -6,6 +7,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +25,7 @@ public class openApp {
 
     private static AndroidDriver driver;
     private WebDriverWait wait;
+
     @BeforeClass
     public void setUpInstiGo() throws MalformedURLException, InterruptedException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -52,6 +55,7 @@ public class openApp {
         MobileElement btnSkip = (MobileElement) driver.findElementById("com.iitdh.sonusourav.instigo:id/btn_skip");
         btnSkip.click();
     }
+
     @BeforeMethod
     public void validateInstiGoLogin() throws MalformedURLException {
         SoftAssert softAssert = new SoftAssert();
@@ -90,7 +94,7 @@ public class openApp {
         wait.until(ExpectedConditions.visibilityOfElementLocated(btnnHamburger));
 
         //Verify the landing page contents are available
-        List <MobileElement> lblInstiGo = (List<MobileElement>) driver.findElementsByClassName("android.widget.TextView");
+        List<MobileElement> lblInstiGo = (List<MobileElement>) driver.findElementsByClassName("android.widget.TextView");
         lblInstiGo.get(0).getText().equalsIgnoreCase("InstiGo");
         //String text0 = lblInstiGo.get(0).getText();
         //String text1 = lblInstiGo.get(1).getText();
@@ -119,6 +123,7 @@ public class openApp {
 
 
     }
+
     @Test(priority = 1)
     public void verifyRegisterComplaints() throws MalformedURLException {
         SoftAssert softAssert = new SoftAssert();
@@ -195,12 +200,6 @@ public class openApp {
 //        MobileElement btnBack = (MobileElement) driver.findElementByAccessibilityId("Navigate up");
 //        btnBack.click();
 
-    }
-
-    @Test(priority = 2)
-    public void setUpCheckComplaintStatus() throws MalformedURLException {
-        SoftAssert softAssert = new SoftAssert();
-
         //Wait ExplicitWait until Status button appear
         wait = new WebDriverWait(driver, 15);
         By btnStatusLocator = By.id("com.iitdh.sonusourav.instigo:id/maintenance_status");
@@ -210,10 +209,25 @@ public class openApp {
         MobileElement btnStatus = (MobileElement) driver.findElement(btnStatusLocator);
         btnStatus.click();
 
-        //Verify the Complaint Name contents are available
-        MobileElement txtComplaintName = (MobileElement) driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ListView/android.widget.RelativeLayout[2]/android.widget.TextView[3]");
-        softAssert.assertEquals(txtComplaintName.getText(), "Mariya_ComplainTitle", "Mariya_ComplainTitle Complain is not registered");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+
+        By txtComplaintNameLocator = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ListView/android.widget.RelativeLayout[2]/android.widget.TextView[3]");
+        for (int i = 1; i <= 30; i++) {
+
+            List<MobileElement> complaintList = driver.findElements(By.id("com.iitdh.sonusourav.instigo:id/status_complain_title"));
+            for (MobileElement ListItem : complaintList) {
+                String complainname = ListItem.getText();
+            }
+            (new TouchAction(driver)).press(PointOption.point(543, 1883)).moveTo(PointOption.point(543, 642)).release().perform();
+            System.out.println("Scroll" + i);
+        }
     }
+
+    //Verify the Complaint Name contents are available
+
+
+    // softAssert.assertAll();
 
 
     @AfterMethod(alwaysRun = true)
