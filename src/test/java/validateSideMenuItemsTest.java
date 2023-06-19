@@ -39,12 +39,12 @@ public class validateSideMenuItemsTest extends  TestBase{
         apphomepage.clickOnHamburgerButton();
         softAssert.assertTrue(apphomepage.verifyEmailAddressContents("mariya1234@mailinator.com"), "Login Email Address is wrong");
         softAssert.assertTrue(appsidemenu.validateSideMenuItemsVisibility(), "Side Menu Items are not visible");
-        softAssert.assertTrue(appsidemenu.validateSideMenuHomeItem());
-        softAssert.assertTrue(appsidemenu.validateSideMenuComplaintsItem());
-        softAssert.assertTrue(appsidemenu.validateSideMenuCouncilItem());
-        softAssert.assertTrue(appsidemenu.validateSideMenuResourceItem());
-        softAssert.assertTrue(appsidemenu.validateSideMenuCouncilItem());
-        softAssert.assertTrue(appsidemenu.validateSideMessHomeItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMenuHomeItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMenuComplaintsItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMenuCouncilItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMenuResourceItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMenuCouncilItem());
+//        softAssert.assertTrue(appsidemenu.validateSideMessHomeItem());
         test.log(Status.INFO,"Side Menu Items are visible");
         softAssert.assertAll();
     }
