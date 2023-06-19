@@ -16,12 +16,14 @@ public class userCreateNewComplaintTest extends  TestBase{
 
     @BeforeMethod
     public void beforeEachTest() throws MalformedURLException, InterruptedException {
+        test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
+        test.log(Status.INFO,"User successfully launch the application");
     }
 
     @Test
     public void userCreateNewComplaintTest1() {
-        test = extend.createTest("Test 01 : User Create a new Complaint Test");
+        test = extend.createTest("Test 02 : User Create a new Complaint Test");
         SoftAssert softAssert = new SoftAssert();
         loginPage loginpage = new loginPage(driver);
         commonPage commonpage = new commonPage(driver);

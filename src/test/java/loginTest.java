@@ -11,13 +11,14 @@ public class loginTest extends  TestBase{
 
     @BeforeMethod
     public void beforeEachTest() throws MalformedURLException, InterruptedException {
+        test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
         test.log(Status.INFO,"User successfully launch the application");
     }
 
     @Test
     public void loginTest1() {
-        test = extend.createTest("Test 01 : login Test");
+        test = extend.createTest("Test 02 : login Test");
 
         SoftAssert softAssert = new SoftAssert();
         loginPage loginpage = new loginPage(driver);

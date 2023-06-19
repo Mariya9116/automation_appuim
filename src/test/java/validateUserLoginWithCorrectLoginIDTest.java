@@ -14,12 +14,13 @@ public class validateUserLoginWithCorrectLoginIDTest extends  TestBase{
 
     @BeforeMethod
     public void beforeEachTest() throws MalformedURLException, InterruptedException {
+        test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
         test.log(Status.INFO,"User successfully launch the application");
     }
     @Test
     public void validateUserLoginWithCorrectLoginID1() {
-        test = extend.createTest("Test 01 : Validate user login With Correct Login ID Test");
+        test = extend.createTest("Test 02 : Validate user login With Correct Login ID Test");
         SoftAssert softAssert = new SoftAssert();
         appHomePage apphomepage = new appHomePage(driver);
         loginPage loginpage = new loginPage(driver);
