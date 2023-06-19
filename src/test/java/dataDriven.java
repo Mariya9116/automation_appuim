@@ -4,14 +4,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Before;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 
-public class OpenAPIDemos {
+public class dataDriven {
 
     private AndroidDriver driver;
 

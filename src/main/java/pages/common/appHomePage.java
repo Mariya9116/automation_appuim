@@ -35,6 +35,10 @@ public class appHomePage {
     @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/nav_home")
     public MobileElement btnHome;
 
+    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/imagebt_hr")
+    public MobileElement btnMess;
+
+
     //*********Page Methods*********
 
     //Get Landing Page Text
@@ -72,6 +76,12 @@ public class appHomePage {
         waitUtility.waitImplicitlyWebDriverWait(driver1, 5);
         btnHome.click();
         waitUtility.waitImplicitlyWebDriverWait(driver1, 7);
+    }
+
+    //Click on btnMess button
+    public void clickOnMessButton() {
+        waitUtility.waitImplicitlyWebDriverWait(driver1, 5);
+        btnMess.click();
     }
 
 

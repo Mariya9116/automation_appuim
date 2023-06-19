@@ -1,47 +1,27 @@
-import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeClass;
+import com.aventstack.extentreports.Status;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.common.appHomePage;
 import pages.common.commonPage;
 import pages.common.loginPage;
-import pages.common.splashPage;
 import pages.complaints.complaintLandingPage;
 import pages.complaints.complaintListPage;
 import pages.complaints.complaintRegisterPage;
-import pages.utility.waitUtility;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
-public class complaintTest {
-    private static AndroidDriver driver;
+public class userCreateNewComplaintTest extends  TestBase{
 
-    @BeforeClass
-    public void setUpInstiGo() throws MalformedURLException, InterruptedException {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("appium:deviceName", "AOSP on IA Emulator");
-        desiredCapabilities.setCapability("appium:platformVersion", "9");
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("appium:appPackage", "com.iitdh.sonusourav.instigo");
-        desiredCapabilities.setCapability("appium:appActivity", "com.iitdh.sonusourav.instigo.Account.SplashActivity");
-        desiredCapabilities.setCapability("appium:ensureWebviewsHavePages", true);
-        desiredCapabilities.setCapability("appium:nativeWebScreenshot", true);
-        desiredCapabilities.setCapability("appium:newCommandTimeout", 3600);
-        desiredCapabilities.setCapability("appium:connectHardwareKeyboard", true);
-
-        URL remoteUrl = new URL("http://127.0.0.1:4723/wd/hub");
-
-        driver = new AndroidDriver(remoteUrl, desiredCapabilities);
-        waitUtility.waitImplicitlyWebDriverWait(driver, 5);
-
-        splashPage splashpage = new splashPage(driver);
-        splashpage.clickOnSkipButton();
+    @BeforeMethod
+    public void beforeEachTest() throws MalformedURLException, InterruptedException {
+        driverSetupInstiGo();
     }
 
     @Test
-    public void complaintTest1() {
+    public void userCreateNewComplaintTest1() {
+        test = extend.createTest("Test 01 : User Create a new Complaint Test");
         SoftAssert softAssert = new SoftAssert();
         loginPage loginpage = new loginPage(driver);
         commonPage commonpage = new commonPage(driver);
@@ -51,6 +31,7 @@ public class complaintTest {
         complaintListPage complaintlistpage = new complaintListPage(driver);
 
         softAssert.assertTrue(loginpage.verifyLoginPage(), "Login Page is not visible");
+        test.log(Status.INFO,"User able to view Login Page");
 
         loginpage.enterUserName("mariya1234@mailinator.com");
         loginpage.enterPassword("mariya1234");
@@ -60,13 +41,19 @@ public class complaintTest {
 
 
         softAssert.assertTrue(apphomepage.verifyLandingPage("InstiGo"), "Landing page header text is wrong");
-        apphomepage.clickOnHamburgerButton();
-        softAssert.assertTrue(apphomepage.verifyEmailAddressContents("mariya1234@mailinator.com"), "Login Email Address is wrong");
-        apphomepage.navigateToHomePage();
+        test.log(Status.INFO,"User successfully log in to the application");
 
+        apphomepage.clickOnHamburgerButton();
+        test.log(Status.INFO,"User successfully navigate to main menu");
+        softAssert.assertTrue(apphomepage.verifyEmailAddressContents("mariya1234@mailinator.com"), "Login Email Address is wrong");
+        test.log(Status.INFO,"User log with correct log ID");
+        apphomepage.navigateToHomePage();
+        test.log(Status.INFO,"User successfully navigate to Home Page");
 
         apphomepage.clickOnComplaintsButton();
+        test.log(Status.INFO,"User successfully navigate to Complaints Page");
         complaintlandingpage.clickOnRegisterComplaintButton();
+        test.log(Status.INFO,"User successfully navigate to Register Page");
         //Register new Complaint
         complaintregisterrage.enterComplaintName("Mariya");
         complaintregisterrage.enterComplainTitle("Mariya_ComplainTitle3");
@@ -79,9 +66,17 @@ public class complaintTest {
         complaintregisterrage.enterComplaintDescription("Complaint_Description_Test");
         complaintregisterrage.clickOnMakeItPrivate();
         complaintregisterrage.clickOnSubmitButton();
+        test.log(Status.INFO,"User successfully submit to Complain form");
         //Navigate to Status
         complaintlandingpage.clickOnStatusButton();
         softAssert.assertTrue(complaintlistpage.findCreatedComplaintName("Mariya_ComplainTitle3"));
+        test.log(Status.INFO,"User successfully navigate to Status Page");
         softAssert.assertAll();
+    }
+
+    @AfterMethod
+    public void closeDriver()
+    {
+        driver.quit();
     }
 }

@@ -1,4 +1,4 @@
-package pages.common;
+package pages.mess;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -7,21 +7,29 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 import pages.utility.waitUtility;
 
-public class appSideMenu {
+public class messLandingPage {
+
+
     private AndroidDriver driver;
 
     //*********Constructor*********
-    public appSideMenu(AndroidDriver driver) {
+    public messLandingPage(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver),this);
     }
 
     //*********MobileElements by using Page Factory*********
-    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/imagebt_bp")
-    public MobileElement btnComplaints;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"FEEDBACK\"]/android.widget.TextView")
+    public MobileElement btnFeedBack;
+
 
     //*********Page Methods*********
-    public void clickOnComplaintsButton() {
-        btnComplaints.click();
+
+    //Click on FeedBack button
+    public void clickOnFeedBackButton() {
+        waitUtility.waitForElementToBeClickable(driver, btnFeedBack, 3);
+        btnFeedBack.click();
     }
+
+
 }
