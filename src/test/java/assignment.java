@@ -17,6 +17,7 @@ import java.io.IOException;
 
 public class assignment extends  TestBase{
     @BeforeMethod
+
     public void beforeEachTest() throws IOException, InterruptedException, ParseException {
         test = extend.createTest("Driver Setup InstiGo");
         driverSetupInstiGo();
