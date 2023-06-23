@@ -1,11 +1,14 @@
 package pages.common;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import pages.utility.waitUtility;
 
 
 import java.util.Arrays;
@@ -37,6 +40,13 @@ public class appSideMenuPage {
 
     @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/nav_council")
     public MobileElement btnCouncil;
+
+    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/nav_profile")
+    public MobileElement btnProfile;
+
+    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/nav_logout")
+    public MobileElement btnLogout;
+
 
     //*********Page Methods*********
 //    public boolean validateSideMenuItemsVisibility() {
@@ -92,6 +102,29 @@ public class appSideMenuPage {
     }
 
 
+// click on Profile button
+    public void clickOnProfileBtn() {
+    btnProfile.click();
+    }
+
+    // click on btnLogout
+    public void clickOnLogoutBtn() {
+        waitUtility.waitForElementToBeClickable(driver, btnLogout,10);
+        btnLogout.click();
+    }
+
+    public void scroll(int Press_X, int Press_Y, int MoveTo_X, int MoveTo_Y) {
+        try {
+            Thread.sleep(1000);
+            (new TouchAction(driver))
+                    .press(PointOption.point(Press_X, Press_Y))
+                    .moveTo(PointOption.point(MoveTo_X, MoveTo_Y))
+                    .release()
+                    .perform();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

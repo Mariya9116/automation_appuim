@@ -1,4 +1,5 @@
 import com.aventstack.extentreports.Status;
+import org.json.simple.parser.ParseException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,19 +11,20 @@ import pages.complaints.complaintLandingPage;
 import pages.complaints.complaintListPage;
 import pages.complaints.complaintRegisterPage;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class userCreateNewComplaintTest extends  TestBase{
 
     @BeforeMethod
-    public void beforeEachTest() throws MalformedURLException, InterruptedException {
+    public void beforeEachTest() throws IOException, InterruptedException, ParseException {
         test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
         test.log(Status.INFO,"User successfully launch the application");
     }
 
     @Test
-    public void userCreateNewComplaintTest1() {
+    public void userCreateNewComplaintTest1() throws InterruptedException {
         test = extend.createTest("Test 02 : User Create a new Complaint Test");
         SoftAssert softAssert = new SoftAssert();
         loginPage loginpage = new loginPage(driver);

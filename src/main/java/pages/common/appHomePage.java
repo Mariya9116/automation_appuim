@@ -49,10 +49,19 @@ public class appHomePage {
         return lblInstiGoGetText.equalsIgnoreCase(InstiGoTest);
     }
 
+    public boolean isLandingPageVerificationFailed() {
+        try {
+            return !lblInstiGoText.isDisplayed();
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
 
     //Tab on hamburger menu
-    public void clickOnHamburgerButton() {
+    public void clickOnHamburgerButton() throws InterruptedException {
         btnHamburger.click();
+        Thread.sleep(3000);
     }
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="ytest" verbose="1" configfailurepolicy="continue">
+    <!--    <listeners>-->
+    <!--        <listener class-name=""/>-->
+    <!--    </listeners>-->
+
+    <test name="java_Appium_Batch14">
+
+        <classes>
+            <class name="loginTest"/>
+            <class name="validateSideMenuItemsTest"/>
+        </classes>
+    </test>
+</suite>

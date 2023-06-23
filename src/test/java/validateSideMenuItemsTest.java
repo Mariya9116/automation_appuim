@@ -5,18 +5,22 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.common.*;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.ParseException;
 
 public class validateSideMenuItemsTest extends  TestBase{
 
     @BeforeMethod
-    public void beforeEachTest() throws MalformedURLException, InterruptedException {
+    public void beforeEachTest() throws IOException, InterruptedException, ParseException, org.json.simple.parser.ParseException {
         test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
         test.log(Status.INFO,"User successfully launch the application");
     }
+
+
     @Test
-    public void validateSideMenuItemsTest1() {
+    public void validateSideMenuItemsTest1() throws InterruptedException {
         test = extend.createTest("Test 02 : User validate Side Menu Items");
         SoftAssert softAssert = new SoftAssert();
         appHomePage apphomepage = new appHomePage(driver);

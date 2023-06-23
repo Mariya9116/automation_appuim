@@ -5,12 +5,15 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.common.commonPage;
 import pages.common.loginPage;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.ParseException;
 
 public class loginTest extends  TestBase{
 
     @BeforeMethod
-    public void beforeEachTest() throws MalformedURLException, InterruptedException {
+    public void beforeEachTest() throws IOException, InterruptedException, ParseException, org.json.simple.parser.ParseException {
         test = extend.createTest("Test 01 : driverSetupInstiGo");
         driverSetupInstiGo();
         test.log(Status.INFO,"User successfully launch the application");

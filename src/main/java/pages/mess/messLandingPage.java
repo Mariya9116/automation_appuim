@@ -22,8 +22,21 @@ public class messLandingPage {
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"FEEDBACK\"]/android.widget.TextView")
     public MobileElement btnFeedBack;
 
+    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/mess_day_button")
+    public MobileElement lblMessDay;
+
 
     //*********Page Methods*********
+
+    //Verify Mess Landing Page
+    public boolean verifyMessLandingPage() {
+        return lblMessDay.isDisplayed();
+    }
+
+    //Verify Mess Day of Week
+    public boolean verifyMessDayOfWeek(String CurrentDayOfWeek) {
+        return lblMessDay.getText().equalsIgnoreCase(CurrentDayOfWeek);
+    }
 
     //Click on FeedBack button
     public void clickOnFeedBackButton() {

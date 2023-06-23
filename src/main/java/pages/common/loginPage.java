@@ -30,13 +30,27 @@ public class loginPage {
     @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/button_login")
     public MobileElement btnLogin;
 
+    @AndroidFindBy(id = "com.iitdh.sonusourav.instigo:id/login_logo")
+    public MobileElement imgLoginLogo;
+
+    @AndroidFindBy(className = "android.widget.Toast")
+    public MobileElement popupToastErrorMessage;
 
     //*********Page Methods*********
 
     //Verify Login Page
     public boolean verifyLoginPage() {
-        waitUtility.waitForElementToBeClickable(driver2, btnLogin, 3);
-        return btnLogin.isEnabled();
+        return imgLoginLogo.isDisplayed();
+    }
+
+    //Verify Toast Error Message
+    public boolean verifyToastErrorMessage() {
+        waitUtility.waitForElementVisibility(driver2, popupToastErrorMessage,5);
+        return popupToastErrorMessage.isDisplayed();
+    }
+    //Verify Username Field
+    public boolean verifyUserNameField() {
+        return txtUserName.isDisplayed();
     }
 
     //Enter Username or Email
@@ -53,6 +67,11 @@ public class loginPage {
         txtPassword.sendKeys(UserPassword);
     }
 
+    //Verify Password Field
+    public boolean verifyPasswordField() {
+        return txtPassword.isDisplayed();
+    }
+
     //Tab in remember me check box
     public void clickOnRememberMeCheckBox() {
         chkboxRememberMe.click();
@@ -62,6 +81,10 @@ public class loginPage {
     public void clickOnLoginButton() {
         btnLogin.click();
         waitUtility.waitImplicitlyWebDriverWait(driver2, 5);
+    }
+    //Verify login button
+    public boolean verifyLoginButton() {
+        return btnLogin.isEnabled();
     }
 
 

@@ -1,5 +1,7 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -80,4 +82,43 @@ public class dataDriven {
     public void closeAPIDemos() {
         driver.quit();
     }
+
+    @Test(dataProvider = "accessibilityDataCSV")
+    public void sampleTest2(String accessibilityId) {
+        SoftAssert softAssert = new SoftAssert();
+        MobileElement lblAccessibility = (MobileElement) driver.findElementByAccessibilityId(accessibilityId);
+        String actualText = lblAccessibility.getText();
+        softAssert.assertEquals(actualText, accessibilityId);
+        softAssert.assertAll();
+    }
+
+
+    //Data from CSV
+//    private static final String CSV_FILE_PATH = "src/main/java/testData/lblNames.csv";
+//    @DataProvider(name = "accessibilityDataCSV")
+//    public Object[][] accessibilityDataCSV() throws IOException {
+//        CSVReader reader = new CSVReaderBuilder(new FileReader(CSV_FILE_PATH)).build();
+//
+//        // Calculate the number of rows in the CSV file
+//        int numRows = 0;
+//        while (reader.readNext() != null) {
+//            numRows++;
+//        }
+//
+//        // Reset the reader to the beginning of the file
+//        reader.close();
+//        reader = new CSVReaderBuilder(new FileReader(CSV_FILE_PATH)).build();
+//
+//        Object[][] data = new Object[numRows][1];
+//        String[] record;
+//
+//        int row = 0;
+//        while ((record = reader.readNext()) != null) {
+//            data[row][0] = record[0];
+//            row++;
+//        }
+//
+//        reader.close();
+//        return data;
+//    }
 }
